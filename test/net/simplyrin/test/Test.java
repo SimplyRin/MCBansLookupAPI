@@ -50,7 +50,13 @@ public class Test {
 		System.out.println("[MCBans] Player " + banData.getPlayerName() + " has " + banData.getTotalBans() + " ban(s) and " + banData.getReputation() + " REP.");
 
 		if(banData.hasBans()) {
-			for(String msg : banData.getAllBans()) {
+			System.out.println("[MCBans] Global bans");
+			for(String msg : banData.getGlobals()) {
+				System.out.println("[MCBans] " + msg);
+			}
+
+			System.out.println("[MCBans] Local bans");
+			for(String msg : banData.getLocals()) {
 				System.out.println("[MCBans] " + msg);
 			}
 		} else {

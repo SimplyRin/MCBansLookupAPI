@@ -32,7 +32,10 @@ public class BanData {
 	private int playerId;
 	private UUID uuid;
 
-	private List<String> all, global, local, other = new ArrayList<>();
+	private List<String> all = new ArrayList<>();
+	private List<String> global = new ArrayList<>();
+	private List<String> local = new ArrayList<>();
+	private List<String> other = new ArrayList<>();
 
 	public BanData(String playerName, int bans, int reputation) {
 		this.playerName = playerName;
@@ -56,21 +59,21 @@ public class BanData {
 		this.uuid = this.toFullUUID(response.getString("uuid"));
 
 		if(response.getJSONArray("global").length() > 0) {
-			for(int v = 0; v < response.getJSONArray("global").length(); v++) {
-				this.all.add(response.getJSONArray("global").getString(v));
-				this.global.add(response.getJSONArray("global").getString(v));
+			for(int integer = 0; integer < response.getJSONArray("global").length(); integer++) {
+				this.all.add(response.getJSONArray("global").getString(integer));
+				this.global.add(response.getJSONArray("global").getString(integer));
 			}
 		}
 		if(response.getJSONArray("local").length() > 0) {
-			for(int v = 0; v < response.getJSONArray("local").length(); v++) {
-				this.all.add(response.getJSONArray("local").getString(v));
-				this.local.add(response.getJSONArray("local").getString(v));
+			for(int integer = 0; integer < response.getJSONArray("local").length(); integer++) {
+				this.all.add(response.getJSONArray("local").getString(integer));
+				this.local.add(response.getJSONArray("local").getString(integer));
 			}
 		}
 		if(response.getJSONArray("other").length() > 0) {
-			for(int v = 0; v < response.getJSONArray("other").length(); v++) {
-				this.all.add(response.getJSONArray("other").getString(v));
-				this.other.add(response.getJSONArray("other").getString(v));
+			for(int integer = 0; integer < response.getJSONArray("other").length(); integer++) {
+				this.all.add(response.getJSONArray("other").getString(integer));
+				this.other.add(response.getJSONArray("other").getString(integer));
 			}
 		}
 	}

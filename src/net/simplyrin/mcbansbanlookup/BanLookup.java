@@ -80,7 +80,7 @@ public class BanLookup {
 
 			String result = stringBuilder.toString();
 
-			System.out.println("[MCBans] Result: " + result);
+			// System.out.println("[MCBans] Result: " + result);
 
 			JSONObject jsonObject;
 			try {
