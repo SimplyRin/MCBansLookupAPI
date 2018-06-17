@@ -21,7 +21,7 @@ MCBans の Ban を検索できる API です。
     <dependency>
       <groupId>net.simplyrin.mcbansbanlookup</groupId>
       <artifactId>MCBansBanLookup</artifactId>
-      <version>1.2-SNAPSHOT</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 ```
