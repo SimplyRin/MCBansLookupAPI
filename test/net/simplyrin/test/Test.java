@@ -47,6 +47,11 @@ public class Test {
 
 		BanData banData = banLookup.getBans(name);
 
+		if(!banData.isValidPlayer()) {
+			System.out.println("[MCBans] Player not found!");
+			return;
+		}
+
 		System.out.println("[MCBans] Player " + banData.getPlayerName() + " has " + banData.getTotalBans() + " ban(s) and " + banData.getReputation() + " REP.");
 
 		if(banData.hasBans()) {

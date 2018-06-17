@@ -25,6 +25,8 @@ import org.json.JSONObject;
  */
 public class BanData {
 
+	private boolean validPlayer = false;
+
 	private String playerName;
 	private int totalBans = 0;
 	private double reputation = 10.0D;
@@ -51,6 +53,9 @@ public class BanData {
 		this.playerName = playerName;
 		if(response.has("player")) {
 			this.playerName = response.getString("player");
+		} else {
+			this.validPlayer = false;
+			return;
 		}
 
 		this.totalBans = response.getInt("total");
@@ -76,10 +81,16 @@ public class BanData {
 				this.other.add(response.getJSONArray("other").getString(integer));
 			}
 		}
+
+		this.validPlayer = true;
 	}
 
 	private UUID toFullUUID(String uuid) {
 		return UUID.fromString(uuid.replaceFirst("([0-9a-fA-F]{8})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]+)", "$1-$2-$3-$4-$5"));
+	}
+
+	public boolean isValidPlayer() {
+		return this.validPlayer;
 	}
 
 	public String getPlayerName() {
