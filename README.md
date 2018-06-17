@@ -1,8 +1,6 @@
 # MCBansLookupAPI
 MCBans の Ban を検索できる API です。
 
-[MCBans](https://github.com/MCBans/MCBans) のコードを一部使っています。
-
 # Maven
 - Repository
 ```XML
