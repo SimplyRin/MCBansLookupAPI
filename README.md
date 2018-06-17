@@ -3,6 +3,29 @@ MCBans の Ban を検索できる API です。
 
 [MCBans](https://github.com/MCBans/MCBans) のコードを一部使っています。
 
+# Maven
+- Repository
+```XML
+  <repositories>
+    <repository>
+      <id>net.simplyrin</id>
+      <name>api</name>
+      <url>https://api.simplyrin.net/maven/</url>
+    </repository>
+  </repositories>
+```
+
+- Dependency
+```XML
+  <dependencies>
+    <dependency>
+      <groupId>net.simplyrin.mcbansbanlookup</groupId>
+      <artifactId>MCBansBanLookup</artifactId>
+      <version>1.2-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+```
+
 # Usage
 ```Java
 BanLookup banLookup = new BanLookup("YOUR_API_KEY_HERE");
