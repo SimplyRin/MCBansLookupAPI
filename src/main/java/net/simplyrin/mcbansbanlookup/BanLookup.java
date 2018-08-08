@@ -83,13 +83,7 @@ public class BanLookup {
 			bufferedReader.close();
 
 			String result = stringBuilder.toString();
-<<<<<<< HEAD
-			System.out.println(result);
-			JSONObject jsonObject;
-=======
-
 			JsonObject jsonObject;
->>>>>>> parent of 354eb20... Revert "Moved to Google Gson."
 			try {
 				jsonObject = new JsonParser().parse(result).getAsJsonObject();
 			} catch (Exception e) {
