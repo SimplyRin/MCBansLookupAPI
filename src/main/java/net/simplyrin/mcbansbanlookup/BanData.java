@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
 /**
  * Created by SimplyRin on 2018/06/16.
  *
- *  Copyright 2018 SimplyRin
+ * Copyright (c) 2018 SimplyRin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,47 +45,47 @@ public class BanData {
 		this.reputation = reputation;
 	}
 
-	public BanData(final String playerName, final JSONObject response) throws Exception {
+	public BanData(final String playerName, final JsonObject response) throws Exception {
 		if(playerName == null || response == null) {
 			return;
 		}
 
 		this.playerName = playerName;
 		if(response.has("player")) {
-			this.playerName = response.getString("player");
+			this.playerName = response.get("player").getAsString();
 		} else {
 			this.validPlayer = false;
 			return;
 		}
 
-		this.totalBans = response.getInt("total");
-		this.reputation = response.getDouble("reputation");
-		this.playerId = Integer.valueOf(response.getString("pid"));
-		this.uuid = this.toFullUUID(response.getString("uuid"));
+		this.totalBans = response.get("total").getAsInt();
+		this.reputation = response.get("reputation").getAsDouble();
+		this.playerId = Integer.valueOf(response.get("pid").getAsInt());
+		this.uuid = this.toUniqueId(response.get("uuid").getAsString());
 
-		if(response.getJSONArray("global").length() > 0) {
-			for(int integer = 0; integer < response.getJSONArray("global").length(); integer++) {
-				this.all.add(response.getJSONArray("global").getString(integer));
-				this.global.add(response.getJSONArray("global").getString(integer));
+		if(response.get("global").getAsJsonArray().size() > 0) {
+			for(int integer = 0; integer < response.get("global").getAsJsonArray().size(); integer++) {
+				this.all.add(response.get("global").getAsJsonArray().get(integer).getAsString());
+				this.global.add(response.get("global").getAsJsonArray().get(integer).getAsString());
 			}
 		}
-		if(response.getJSONArray("local").length() > 0) {
-			for(int integer = 0; integer < response.getJSONArray("local").length(); integer++) {
-				this.all.add(response.getJSONArray("local").getString(integer));
-				this.local.add(response.getJSONArray("local").getString(integer));
+		if(response.get("local").getAsJsonArray().size() > 0) {
+			for(int integer = 0; integer < response.get("local").getAsJsonArray().size(); integer++) {
+				this.all.add(response.get("local").getAsJsonArray().get(integer).getAsString());
+				this.local.add(response.get("local").getAsJsonArray().get(integer).getAsString());
 			}
 		}
-		if(response.getJSONArray("other").length() > 0) {
-			for(int integer = 0; integer < response.getJSONArray("other").length(); integer++) {
-				this.all.add(response.getJSONArray("other").getString(integer));
-				this.other.add(response.getJSONArray("other").getString(integer));
+		if(response.get("other").getAsJsonArray().size() > 0) {
+			for(int integer = 0; integer < response.get("other").getAsJsonArray().size(); integer++) {
+				this.all.add(response.get("other").getAsJsonArray().get(integer).getAsString());
+				this.other.add(response.get("other").getAsJsonArray().get(integer).getAsString());
 			}
 		}
 
 		this.validPlayer = true;
 	}
 
-	private UUID toFullUUID(String uuid) {
+	private UUID toUniqueId(String uuid) {
 		return UUID.fromString(uuid.replaceFirst("([0-9a-fA-F]{8})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]+)", "$1-$2-$3-$4-$5"));
 	}
 

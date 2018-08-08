@@ -6,7 +6,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * Created by SimplyRin on 2018/06/16.
@@ -80,11 +81,9 @@ public class BanLookup {
 
 			String result = stringBuilder.toString();
 
-			// System.out.println("[MCBans] Result: " + result);
-
-			JSONObject jsonObject;
+			JsonObject jsonObject;
 			try {
-				jsonObject = new JSONObject(result);
+				jsonObject = new JsonParser().parse(result).getAsJsonObject();
 			} catch (Exception e) {
 				if(result.contains("error")) {
 					System.out.println("[MCBans] JSON error while trying to parse lookup data!");
