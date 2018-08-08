@@ -8,6 +8,9 @@ import java.net.URLConnection;
 
 import org.json.JSONObject;
 
+import net.simplyrin.mcbansbanlookup.exceptions.JsonParseErrorException;
+import net.simplyrin.mcbansbanlookup.exceptions.ServerDisabledException;
+
 /**
  * Created by SimplyRin on 2018/06/16.
  *
@@ -48,7 +51,7 @@ public class BanLookup {
 		return this.playerName;
 	}
 
-	public BanData getBans(String playerName) {
+	public BanData getBans(String playerName) throws JsonParseErrorException, ServerDisabledException {
 		this.playerName = playerName;
 
 		if(this.playerName == null) {
@@ -79,19 +82,19 @@ public class BanLookup {
 			bufferedReader.close();
 
 			String result = stringBuilder.toString();
-
-			// System.out.println("[MCBans] Result: " + result);
-
+			System.out.println(result);
 			JSONObject jsonObject;
 			try {
 				jsonObject = new JSONObject(result);
 			} catch (Exception e) {
 				if(result.contains("error")) {
 					System.out.println("[MCBans] JSON error while trying to parse lookup data!");
+					throw new JsonParseErrorException("JSON error while trying to parse lookup data!");
 				}
 				if(result.contains("Server Disabled")) {
 					System.out.println("[MCBans] Server Disabled by an MCBans Staff Member");
 					System.out.println("[MCBans] To appeal this decision, please file ticket on forums.mcbans.com");
+					throw new ServerDisabledException("Server Disabled by an MCBans Staff Member\nTo appeal this decision, please file ticket on forums.mcbans.com");
 				}
 				return null;
 			}

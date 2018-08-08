@@ -45,7 +45,7 @@ public class BanData {
 		this.reputation = reputation;
 	}
 
-	public BanData(final String playerName, final JSONObject response) throws Exception {
+	public BanData(String playerName, JSONObject response) throws Exception {
 		if(playerName == null || response == null) {
 			return;
 		}
